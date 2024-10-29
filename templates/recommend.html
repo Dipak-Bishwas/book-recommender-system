@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body class="bg-black">
+
+    <nav class="bg-blue-800 shadow-lg p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-white text-2xl font-bold">My Book Recommender</a>
+            <ul class="flex space-x-6 text-lg">
+                <li><a href="/" class="text-white hover:text-gray-200 transition duration-300">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-gray-200 transition duration-300">Recommend</a></li>
+                <li><a class="text-white hover:text-gray-200 transition duration-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-white text-4xl font-bold">Recommend Books</h1>
+            <form action="/recommend_books" method="post" class="mt-4">
+                <input name="user_input" type="text" class="form-input rounded-md w-1/2 mx-auto p-2" placeholder="Enter book name or genre">
+                <br>
+                <input type="submit" class="mt-4 btn bg-yellow-500 text-white font-semibold py-2 px-4 rounded hover:bg-yellow-400 transition duration-300">
+            </form>
+        </div>
+
+        <!-- Display message if the book is not found -->
+        {% if message %}
+            <div class="text-red-500 text-center mb-4">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% if data %}
+                {% for i in data %}
+                    <div class="bg-gray-800 hover:bg-gray-700 transition duration-300 rounded-lg shadow-lg p-6">
+                        <img class="w-full h-48 object-cover rounded-md mb-4 shadow-md" src="{{ i[2] }}" alt="Book Image">
+                        <p class="text-white text-lg font-semibold">{{ i[0] }}</p>
+                        <h4 class="text-green-400 text-md font-medium">{{ i[1] }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body class="bg-gray-900 text-white">
+
+    <nav class="bg-blue-800 shadow-lg fixed w-full z-10">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a class="text-white text-2xl font-bold">Book Recommendation System</a>
+            <ul class="flex space-x-6 text-lg">
+                <li><a href="/" class="text-white hover:text-gray-200 transition duration-300">Home</a></li>
+                <li><a href="/recommend" class="text-white hover:text-gray-200 transition duration-300">Recommend</a></li>
+                <li><a class="text-white hover:text-gray-200 transition duration-300">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-5xl font-extrabold tracking-tight mt-8">Top 50 Books</h1> 
+        <p class="text-gray-400 mt-4 text-lg">Explore our curated list of top-rated books!</p>
+    </div>
+
+        <!-- Book Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% for i in range(book_name|length) %}
+            <div class="bg-gray-800 hover:bg-gray-700 transition duration-300 p-6 rounded-lg shadow-xl hover:shadow-2xl">
+                <img class="w-full h-64 object-cover rounded-md mb-4 shadow-md" src="{{ image[i] }}" alt="Book Image">
+                <p class="text-white text-xl font-semibold mb-2">{{ book_name[i] }}</p>
+                <h4 class="text-green-400 text-md font-medium">{{ author[i] }}</h4>
+                <!-- Adjusted div to stack Votes and Rating vertically -->
+                <div class="flex flex-col mt-4 space-y-1">
+                    <h4 class="text-gray-400 text-sm">Votes: <span class="font-bold">{{ votes[i] }}</span></h4>
+                    <h4 class="text-yellow-400 text-sm">Rating: <span class="font-bold">{{ rating[i] }}</span></h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</body>
+</html>
